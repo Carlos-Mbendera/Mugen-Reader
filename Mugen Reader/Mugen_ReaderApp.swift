@@ -11,7 +11,7 @@ import SwiftUI
 struct Mugen_ReaderApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }

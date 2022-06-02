@@ -8,17 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		B665F4502849221200551086 /* Mugen_ReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665F44F2849221200551086 /* Mugen_ReaderApp.swift */; };
-		B665F4522849221200551086 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665F4512849221200551086 /* ContentView.swift */; };
+		B665F4522849221200551086 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665F4512849221200551086 /* MainView.swift */; };
 		B665F4542849221400551086 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B665F4532849221400551086 /* Assets.xcassets */; };
 		B665F4572849221400551086 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B665F4562849221400551086 /* Preview Assets.xcassets */; };
+		B665F45F284922DE00551086 /* MangaJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665F45E284922DE00551086 /* MangaJSON.swift */; };
+		B665F4612849232D00551086 /* MangaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665F4602849232D00551086 /* MangaInfo.swift */; };
+		B665F4632849237300551086 /* getMangaCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665F4622849237300551086 /* getMangaCover.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B665F44C2849221200551086 /* Mugen Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mugen Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B665F44F2849221200551086 /* Mugen_ReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mugen_ReaderApp.swift; sourceTree = "<group>"; };
-		B665F4512849221200551086 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B665F4512849221200551086 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		B665F4532849221400551086 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B665F4562849221400551086 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B665F45E284922DE00551086 /* MangaJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaJSON.swift; sourceTree = "<group>"; };
+		B665F4602849232D00551086 /* MangaInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaInfo.swift; sourceTree = "<group>"; };
+		B665F4622849237300551086 /* getMangaCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getMangaCover.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +57,11 @@
 		B665F44E2849221200551086 /* Mugen Reader */ = {
 			isa = PBXGroup;
 			children = (
+				B665F45D284922CD00551086 /* Models */,
 				B665F44F2849221200551086 /* Mugen_ReaderApp.swift */,
-				B665F4512849221200551086 /* ContentView.swift */,
+				B665F4512849221200551086 /* MainView.swift */,
+				B665F4602849232D00551086 /* MangaInfo.swift */,
+				B665F4622849237300551086 /* getMangaCover.swift */,
 				B665F4532849221400551086 /* Assets.xcassets */,
 				B665F4552849221400551086 /* Preview Content */,
 			);
@@ -65,6 +74,14 @@
 				B665F4562849221400551086 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B665F45D284922CD00551086 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B665F45E284922DE00551086 /* MangaJSON.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +154,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B665F4522849221200551086 /* ContentView.swift in Sources */,
+				B665F4522849221200551086 /* MainView.swift in Sources */,
 				B665F4502849221200551086 /* Mugen_ReaderApp.swift in Sources */,
+				B665F4612849232D00551086 /* MangaInfo.swift in Sources */,
+				B665F45F284922DE00551086 /* MangaJSON.swift in Sources */,
+				B665F4632849237300551086 /* getMangaCover.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
