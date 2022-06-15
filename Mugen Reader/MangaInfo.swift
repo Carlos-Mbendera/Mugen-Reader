@@ -10,8 +10,8 @@ import SwiftUI
 struct MangaInfo: View {
   
   //  @State private var chapteResults = [ChapterList]()
-    @State private var volumeResults = [Volume]()
-    @State private var chapteResults = [ListChapterAggregated]()
+   
+    @State private var chapterResults = [FeedChapters]()
     
     
    
@@ -36,13 +36,32 @@ struct MangaInfo: View {
                 .padding()
             
             
-            List(volumeResults, id: \.volume) { item in
-                  Text("Volume \(item.volume)")
+            List(chapterResults, id: \.id) { item in
+                
+                if let chapterOptional = item.attributes.chapter{
+                    if let titleoptional = item.attributes.title{
+                    
+                    Text("Chapter \(chapterOptional)")
+                    if (titleoptional.isEmpty){
+                        //DO Nothing, There's proably a better way to write this. Just note that Manga Dex API sometimes returns whitespace which passes unwrap and messes up ui
+                        //Hence me doing this
+                    }else{
+                        Text(titleoptional).padding(.leading, 10)
+                    }
+                  
+                 
+                }else{
+                    
+                    Text("Chapter \(chapterOptional)")
+                }
+                }
+              
                
-            }.task {
-                await getListOfChapterAggregated()
             }
-            .navigationTitle("Chapters")
+            .task {
+                await getMangaFeed()
+            }
+            
             
             
         }
@@ -53,15 +72,16 @@ struct MangaInfo: View {
     
     
     
-    func getListOfChapterAggregated() async{
+    func getMangaFeed() async{
         
         print("Get Aggregated List Started")
         
         let mangaID : String = mangaSelected.id
        
+        let rawURL: String = "https://api.mangadex.org/manga/\(mangaID)/feed?limit=100&translatedLanguage%5B%5D=en&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&contentRating%5B%5D=pornographic&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc"
         
-        let rawURL: String = "https://api.mangadex.org/manga/\(mangaID)/aggregate?translatedLanguage%5B%5D=en"
-        
+        print("API CALL IS \(rawURL)")
+   
         
         guard let apiurl = URL(string: rawURL) else {
           
@@ -74,15 +94,13 @@ struct MangaInfo: View {
                 let (data, _) = try await URLSession.shared.data(from: apiurl)
               
                 print(data)
-                if let decodedResponse = try? JSONDecoder().decode(ChapterAggregateRoot.self, from: data){
+                if let decodedResponse = try? JSONDecoder().decode(FeedResponse.self, from: data){
                     
-                    volumeResults = Array(decodedResponse.volumes.values)
+                    chapterResults = decodedResponse.data
                     
                     print("Done Get VOlUMES broski")
                     
-                   for a in volumeResults{
-                        print("Volume is \(a.volume)")
-                    }
+                   
                     
                 }else{
                     print("if let failed")
@@ -105,80 +123,7 @@ struct MangaInfo: View {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    
-    
-    func getChapterList() async{
-        
-        print("Get Chapter List Started")
-        
-        let mangaID : String = mangaSelected.id
-        var chapterLimit: Int = 99
-        
-        let rawURL: String = "https://api.mangadex.org/chapter?limit=\(chapterLimit)&manga=\(mangaID)&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&contentRating%5B%5D=pornographic&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc"
-        
-        
-        guard let apiurl = URL(string: rawURL) else {
-          
-            print("Failure and Emotional Damage")
-            return
-        }
 
-        
-            do{
-                let (data, _) = try await URLSession.shared.data(from: apiurl)
-              
-                print(data)
-                if let decodedResponse = try? JSONDecoder().decode(ChapterResponse.self, from: data){
-                    
-                    chapteResults = decodedResponse.data
-                    print("Done Get Chapters broski")
-                    
-                    for a in chapteResults{
-                        print("id is \(a.id)")
-                    }
-                    
-                }else{
-                    print("if let failed")
-                }
-                
-                
-                
-            }
-            catch{
-                print("INVALID DATA DUDE, Emotional Damage")
-            }
-        
-        print("Get chapter Finished")
-        }
-    
-}
-
-
-*/
 
 
 

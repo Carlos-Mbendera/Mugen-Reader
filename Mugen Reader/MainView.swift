@@ -10,6 +10,8 @@ import SwiftUI
 
 struct MainView: View {
     
+    @State private var seasonalListIDs = [ListMangaIDs]()
+    
     @State private var mangaResults = [Manga]()
     
     
@@ -53,9 +55,9 @@ struct MainView: View {
                 
       
             }
-            .navigationTitle("Home")
+            .navigationTitle("Seasonal")
             .task{
-                await getManga()
+                await processSeasonalList()
             }
             
         }.navigationViewStyle(.stack)
@@ -65,18 +67,67 @@ struct MainView: View {
         
     }
     
+    func processSeasonalList() async{
+        await getSeasonalMangaList()
+        await getSeasonalMangaDetails()
+    }
     
-    func getManga() async{
+    
+    
+  func  getSeasonalMangaList() async{
         
-    //    print("Get Manga Started")
-        
-        
-        let mangaCallURL: String = "https://api.mangadex.org/manga?limit=5&includedTagsMode=AND&excludedTagsMode=OR&availableTranslatedLanguage%5B%5D=en&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&contentRating%5B%5D=pornographic&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art"
-        
+      let seasonListId: String = "1f43956d-9fe6-478e-9805-aa75ec0ac45e"
+      let listURL: String = "https://api.mangadex.org/list/\(seasonListId)"
       
+      guard let apiurl = URL(string: listURL) else {
         
-       
-        guard let apiurl = URL(string: mangaCallURL) else {
+          print("Failure and Emotional Damage")
+          return
+      }
+      
+          do{
+              let (data, _) = try await URLSession.shared.data(from: apiurl)
+            
+              print(data)
+              if let decodedResponse = try? JSONDecoder().decode(SeasonalResponse.self, from: data){
+                  
+                  seasonalListIDs = decodedResponse.data.relationships
+                  print("Done Get Seasonal")
+                  
+                  
+              }else{
+                  print("if let failed")
+              }
+              
+              
+              
+          }
+          catch{
+              print("INVALID DATA DUDE, Emotional Damage")
+          }
+      
+    }
+    
+    
+    
+    
+    
+    func getSeasonalMangaDetails() async{
+        print("Started get details")
+        var idsListString: String = ""
+        
+        for a in seasonalListIDs{
+            idsListString = "\(idsListString)&ids%5B%5D=\(a.id)"
+        }
+        
+        
+        
+        
+        var detailsAPICall: String = "https://api.mangadex.org/manga?includedTagsMode=AND&excludedTagsMode=OR&availableTranslatedLanguage%5B%5D=en\(idsListString)&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=manga&includes%5B%5D=cover_art"
+        
+  
+        
+        guard let apiurl = URL(string: detailsAPICall) else {
           
             print("Failure and Emotional Damage")
             return
@@ -90,27 +141,21 @@ struct MainView: View {
                 if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data){
                     
                     mangaResults = decodedResponse.data
-                    print("Done Get Manga")
+                    print("Done Get Seasonal Manga")
                     
-                    for a in mangaResults{
-                        print("id is \(a.id)")
-                    }
                     
                 }else{
                     print("if let failed")
                 }
-                
-                
                 
             }
             catch{
                 print("INVALID DATA DUDE, Emotional Damage")
             }
         
-     //   print("Get Manga Finished")
-        }
+    }
     
-    
+
     
 }
 

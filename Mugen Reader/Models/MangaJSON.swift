@@ -8,31 +8,43 @@
 import Foundation
 
 
-
-
-struct ChapterAggregateRoot: Codable{
+struct SeasonalResponse: Codable{
     var  result:    String
-    var volumes: [String: Volume]
+    var  response:  String
+    var  data: CustomList
 }
 
-struct Volume: Codable {
-    var volume: String
-    var count: Int
-    var chapters: [String: Chapter]
+struct CustomList: Codable{
+    var id: String
+    var type: String
+    var relationships: [ListMangaIDs]
+    
 }
 
-struct Chapter: Codable{
-  var  chapter:   String
-  var  id    :   String
-
-}
-
-
-
-struct ListChapterAggregated: Codable{
-    var chapter: Int
+struct ListMangaIDs:Codable{
     var id: String
 }
+
+
+
+
+struct FeedResponse: Codable{
+    var  result:    String
+    var  response:  String
+    var  data: [FeedChapters]
+}
+
+struct FeedChapters: Codable{
+    var id: String
+    var attributes: ChapterDetails
+}
+
+struct ChapterDetails: Codable{
+    var volume   :    String?
+    var chapter  :    String?
+    var title    :    String?
+}
+
 
 
 
@@ -46,14 +58,6 @@ struct Response: Codable{
     
 }
 
-struct ChapterResponse: Codable{
-    
-  var  result:    String
-  var  response:  String
-  var  data: [ChapterList]
-    
-}
-
 
 struct Manga: Codable{
     var id: String
@@ -61,23 +65,6 @@ struct Manga: Codable{
     var attributes: MangaAttributes
     var relationships: [MangaRelations]
 }
-
-struct ChapterList: Codable{
-    var id: String
-    var type: String
-    var attributes: ChapterAttributes
-}
-
-
-struct ChapterAttributes: Codable{
-    
-   var chapter    : String
-   var title      : String
-  // var pages      : String
-//   var publishAt  : Date
-}
-
-
 
 
 struct MangaAttributes: Codable{
@@ -93,7 +80,6 @@ struct MangaLang: Codable   {
 }
 
 
-
 struct MangaRelations: Codable{
     var id: String
     var type: String
@@ -101,6 +87,6 @@ struct MangaRelations: Codable{
 }
 
 struct MangaRelationAttributes: Codable{
-    var fileName: String
+    var fileName: String?
 }
 

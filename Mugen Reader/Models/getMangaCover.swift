@@ -23,49 +23,59 @@ func returnCover(item: Manga) -> some View{
             
             if  let coverName = relation.attributes?.fileName{
             
-                   finallink = "https://uploads.mangadex.org/covers/\(item.id)/\(coverName)"
-                        
-               
+                   finallink = "https://uploads.mangadex.org/covers/\(item.id)/\(coverName).256.jpg"
        
-           //     let _ =  print("\(item.attributes.title) https://uploads.mangadex.org/covers/\(item.id)/\(coverName)")
+           //    let _ =  print("\(item.attributes.title) https://uploads.mangadex.org/covers/\(item.id)/\(coverName)")
              
             }
         }
     }
     
-    return AsyncImage(url: URL(string: finallink) )
-    {phase in
+    // REASON FOR ASYNC TO HAPPEN 2 TIMES IS CAUSE SOMETIMES IT FAILS FIRST TRY BUT ALMOST ALWAYS SECOND
+    
+    
+    
+    return AsyncImage(url: URL(string: finallink) ) {phase in
         
-        switch phase{
-       
-        case.success(let image):
+        if let image = phase.image {
             image.resizable()
-        case.failure(_):
-            AsyncImage(url: URL(string: finallink) ) {image in
+        
+        } else if phase.error != nil {
+         
+            ////////////////////  TRY AGAIN FOR ERROR STARTS HERE
             
-            image.resizable()
+            AsyncImage(url: URL(string: finallink) ) {phase in
                 
-        } placeholder: {
-            ProgressView()
+                if let image = phase.image {
+                    image.resizable()
+                
+                } else if phase.error != nil {
+                    Text("Unable To Load Image \n :(")
+                } else {
+                AsyncImage(url: URL(string: finallink) ) {image in
+                image.resizable()
+            } placeholder: {
+                ProgressView()
+                    }
+                }
+            }
+        
+            ////////////////////  TRY AGAIN FOR ERROR ENDS HERE
+        
         }
-        case .empty:
-            AsyncImage(url: URL(string: finallink) ) {image in
+        
+        
+        else {
+        AsyncImage(url: URL(string: finallink) ) {image in
+        
+        image.resizable()
             
-            image.resizable()
-                
-        } placeholder: {
-            ProgressView()
-        }
-        @unknown default:
-            AsyncImage(url: URL(string: finallink) ) {image in
-            
-            image.resizable()
-                
-        } placeholder: {
-            ProgressView()
-        }
+    } placeholder: {
+        ProgressView()
+            }
         }
     }
+    
 }
 
 
