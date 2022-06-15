@@ -26,6 +26,8 @@ struct MainView: View {
                       
                             
                    returnCover(item: item)
+                            .frame(width: 75, height: 112.5)
+                            .cornerRadius(10)
                          
                         
                         VStack(alignment: .leading){

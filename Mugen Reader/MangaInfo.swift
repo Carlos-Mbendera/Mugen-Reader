@@ -9,7 +9,11 @@ import SwiftUI
 
 struct MangaInfo: View {
   
-    @State private var chapteResults = [ChapterList]()
+  //  @State private var chapteResults = [ChapterList]()
+    @State private var volumeResults = [Volume]()
+    @State private var chapteResults = [ListChapterAggregated]()
+    
+    
    
     var mangaSelected: Manga
     
@@ -18,7 +22,9 @@ struct MangaInfo: View {
         VStack {
             HStack{
                 
-                returnBiggerCover(item: mangaSelected)
+                returnCover(item: mangaSelected)
+                    .frame(width: 112.5, height: 168.75)
+                    .cornerRadius(10)
                 
                 
                 Text(mangaSelected.attributes.title.en).font(.title).padding()
@@ -30,12 +36,11 @@ struct MangaInfo: View {
                 .padding()
             
             
-            List(chapteResults, id: \.id) { item in
-                Text("Chapter \(item.attributes.chapter)")
-                Text(item.attributes.title).font(.caption).padding(.leading, 10)
-                
+            List(volumeResults, id: \.volume) { item in
+                  Text("Volume \(item.volume)")
+               
             }.task {
-                await getChapterList()
+                await getListOfChapterAggregated()
             }
             .navigationTitle("Chapters")
             
@@ -44,6 +49,86 @@ struct MangaInfo: View {
         
     }
     
+    
+    
+    
+    
+    func getListOfChapterAggregated() async{
+        
+        print("Get Aggregated List Started")
+        
+        let mangaID : String = mangaSelected.id
+       
+        
+        let rawURL: String = "https://api.mangadex.org/manga/\(mangaID)/aggregate?translatedLanguage%5B%5D=en"
+        
+        
+        guard let apiurl = URL(string: rawURL) else {
+          
+            print("Failure and Emotional Damage")
+            return
+        }
+
+        
+            do{
+                let (data, _) = try await URLSession.shared.data(from: apiurl)
+              
+                print(data)
+                if let decodedResponse = try? JSONDecoder().decode(ChapterAggregateRoot.self, from: data){
+                    
+                    volumeResults = Array(decodedResponse.volumes.values)
+                    
+                    print("Done Get VOlUMES broski")
+                    
+                   for a in volumeResults{
+                        print("Volume is \(a.volume)")
+                    }
+                    
+                }else{
+                    print("if let failed")
+                }
+                
+                
+                
+            }
+            catch{
+                print("INVALID DATA DUDE, Emotional Damage")
+            }
+        
+        print("Get VOLUMES Finished")
+        }
+    
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
     
     
     func getChapterList() async{
@@ -89,21 +174,11 @@ struct MangaInfo: View {
         
         print("Get chapter Finished")
         }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
 
 
-
+*/
 
 
 

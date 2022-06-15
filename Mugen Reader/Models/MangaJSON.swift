@@ -7,6 +7,37 @@
 
 import Foundation
 
+
+
+
+struct ChapterAggregateRoot: Codable{
+    var  result:    String
+    var volumes: [String: Volume]
+}
+
+struct Volume: Codable {
+    var volume: String
+    var count: Int
+    var chapters: [String: Chapter]
+}
+
+struct Chapter: Codable{
+  var  chapter:   String
+  var  id    :   String
+
+}
+
+
+
+struct ListChapterAggregated: Codable{
+    var chapter: Int
+    var id: String
+}
+
+
+
+
+
 struct Response: Codable{
     
   var  result:    String
