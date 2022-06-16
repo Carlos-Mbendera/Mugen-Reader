@@ -38,25 +38,31 @@ struct MangaInfo: View {
             
             List(chapterResults, id: \.id) { item in
                 
-                if let chapterOptional = item.attributes.chapter{
-                    if let titleoptional = item.attributes.title{
+                
+                NavigationLink(destination: ReadChapter(chapterID: item.id), label: {
                     
-                    Text("Chapter \(chapterOptional)")
-                    if (titleoptional.isEmpty){
-                        //DO Nothing, There's proably a better way to write this. Just note that Manga Dex API sometimes returns whitespace which passes unwrap and messes up ui
-                        //Hence me doing this
+                    if let chapterOptional = item.attributes.chapter{
+                        if let titleoptional = item.attributes.title{
+                        
+                        Text("Chapter \(chapterOptional)")
+                        if (titleoptional.isEmpty){
+                            //DO Nothing, There's proably a better way to write this. Just note that Manga Dex API sometimes returns whitespace which passes unwrap and messes up ui
+                            //Hence me doing this
+                        }else{
+                            Text(titleoptional).padding(.leading, 10)
+                        }
+                      
+                     
                     }else{
-                        Text(titleoptional).padding(.leading, 10)
+                        
+                        Text("Chapter \(chapterOptional)")
+                        }
                     }
-                  
-                 
-                }else{
                     
-                    Text("Chapter \(chapterOptional)")
-                }
-                }
-              
-               
+                    //Nav Link Ends Here next line
+                })
+                
+               //List ends here next line
             }
             .task {
                 await getMangaFeed()

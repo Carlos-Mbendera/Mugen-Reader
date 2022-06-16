@@ -8,6 +8,22 @@
 import Foundation
 
 
+struct ReadChapterResponse: Codable{
+   var result:  String
+   var baseUrl: String
+   var chapter: ReadChapterPages
+}
+
+    struct ReadChapterPages: Codable{
+        var  hash: String
+        var  data: [String]
+        var  dataSaver: [String]
+    }
+
+
+
+
+
 struct SeasonalResponse: Codable{
     var  result:    String
     var  response:  String
