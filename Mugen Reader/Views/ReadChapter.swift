@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-
-
-
-
 struct ReadChapter: View {
     
     var chapterID: String
@@ -40,10 +36,6 @@ struct ReadChapter: View {
             await getReadChapterURLSList()
         }
        
-        
-        
-        
-        
         
         
         //MARK: - Below code preloads all pages instead lazy loading. It works but is more prone to download errors and I haven't fixed returnMangaPage
@@ -108,12 +100,6 @@ struct ReadChapter: View {
     
     
 }
-
-
-
-
-
-
 
 
 

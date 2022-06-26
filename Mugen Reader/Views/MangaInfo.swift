@@ -27,13 +27,19 @@ struct MangaInfo: View {
                     .cornerRadius(10)
                 
                 
-                Text(mangaSelected.attributes.title.en).font(.title).padding()
+                if let title = mangaSelected.attributes.title.en{
+                    Text(title).font(.title).padding()
+                    
+                }
+                
             }
             
-            Text(mangaSelected.attributes.description.en)
+            if  let description = mangaSelected.attributes.description.en{
+                Text(description)
                 .font(.body)
                 .lineLimit(4)
                 .padding()
+            }
             
             
             List(chapterResults, id: \.id) { item in

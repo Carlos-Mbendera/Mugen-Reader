@@ -64,8 +64,6 @@ struct ChapterDetails: Codable{
 
 
 
-
-
 struct Response: Codable{
     
   var  result:    String
@@ -92,7 +90,7 @@ struct MangaAttributes: Codable{
 }
 
 struct MangaLang: Codable   {
-    var en: String
+    var en: String?
 }
 
 
@@ -105,4 +103,61 @@ struct MangaRelations: Codable{
 struct MangaRelationAttributes: Codable{
     var fileName: String?
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// FOR DEBUGIN PURPOSES
+
+
+
+struct DBResponse: Codable{
+    
+  var  result:    String
+  var  response:  String
+  var  data: [DBManga]
+    
+}
+
+
+struct DBManga: Codable{
+    var id: String
+    var type: String
+    var attributes: DBMangaAttributes
+    var relationships: [DBMangaRelations]
+}
+
+
+struct DBMangaAttributes: Codable{
+    var title: DBMangaLang
+    var description: DBMangaLang
+   // var lastChapter: String
+   var year: Int? //Not all Manga on Manga Dex have Year Released, Causes errors if assumed. Same applies to above ones. Just rather not force them into app
+   var status: String
+}
+
+struct DBMangaLang: Codable   {
+    var en: String?
+}
+
+
+struct DBMangaRelations: Codable{
+    var id: String
+    var type: String
+    var attributes: DBMangaRelationAttributes?
+}
+
+struct DBMangaRelationAttributes: Codable{
+    var fileName: String?
+}
+
 
