@@ -15,6 +15,7 @@
 		B665F4612849232D00551086 /* MangaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665F4602849232D00551086 /* MangaInfo.swift */; };
 		B665F4632849237300551086 /* getMangaCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665F4622849237300551086 /* getMangaCover.swift */; };
 		B69480A528672C90006C12A8 /* ListMangaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69480A428672C90006C12A8 /* ListMangaItem.swift */; };
+		B6A6A3202868CB7600CF9F32 /* ListApiCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6A31F2868CB7600CF9F32 /* ListApiCall.swift */; };
 		B6A6AC0C28492C2A00D20620 /* ReadChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A6AC0B28492C2A00D20620 /* ReadChapter.swift */; };
 		B6CB0691285B8BCE0007846D /* getMangaPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CB0690285B8BCE0007846D /* getMangaPageView.swift */; };
 		B6F30AAB2865F189002DF03C /* SeasonalManga.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F30AAA2865F189002DF03C /* SeasonalManga.swift */; };
@@ -31,6 +32,7 @@
 		B665F4602849232D00551086 /* MangaInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaInfo.swift; sourceTree = "<group>"; };
 		B665F4622849237300551086 /* getMangaCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getMangaCover.swift; sourceTree = "<group>"; };
 		B69480A428672C90006C12A8 /* ListMangaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMangaItem.swift; sourceTree = "<group>"; };
+		B6A6A31F2868CB7600CF9F32 /* ListApiCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListApiCall.swift; sourceTree = "<group>"; };
 		B6A6AC0B28492C2A00D20620 /* ReadChapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadChapter.swift; sourceTree = "<group>"; };
 		B6CB0690285B8BCE0007846D /* getMangaPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getMangaPageView.swift; sourceTree = "<group>"; };
 		B6F30AAA2865F189002DF03C /* SeasonalManga.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonalManga.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				B665F4622849237300551086 /* getMangaCover.swift */,
 				B6CB0690285B8BCE0007846D /* getMangaPageView.swift */,
 				B665F45E284922DE00551086 /* MangaJSON.swift */,
+				B6A6A31F2868CB7600CF9F32 /* ListApiCall.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				B6F30AAB2865F189002DF03C /* SeasonalManga.swift in Sources */,
 				B665F4522849221200551086 /* MainView.swift in Sources */,
 				B665F4502849221200551086 /* Mugen_ReaderApp.swift in Sources */,
+				B6A6A3202868CB7600CF9F32 /* ListApiCall.swift in Sources */,
 				B6F30AAD2865F31F002DF03C /* SearchManga.swift in Sources */,
 				B665F4612849232D00551086 /* MangaInfo.swift in Sources */,
 				B6A6AC0C28492C2A00D20620 /* ReadChapter.swift in Sources */,

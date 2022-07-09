@@ -31,7 +31,7 @@ struct ListViewMangaItem: View{
                     .lineLimit(2)
                     .padding(.bottom, 5)
                 }else {
-                    Text("Title Comes Here UwU")
+                    Text("<<Title Comes Here UwU>>\n Placeholder TxT")
                         .fontWeight(.semibold)
                         .lineLimit(2)
                         .padding(.bottom, 5)

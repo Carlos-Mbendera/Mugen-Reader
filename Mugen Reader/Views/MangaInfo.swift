@@ -33,13 +33,17 @@ struct MangaInfo: View {
                 }
                 
             }
-            
-            if  let description = mangaSelected.attributes.description.en{
+            //TODO: - Fix Description
+            /*
+             
+            if  let description = mangaSelected.attributes.description?.en{
                 Text(description)
                 .font(.body)
                 .lineLimit(4)
                 .padding()
             }
+            
+            */
             
             
             List(chapterResults, id: \.id) { item in
@@ -130,18 +134,10 @@ struct MangaInfo: View {
     
 }
     
-    
-    
-    
-    
-    
 
-
-
-
-
-var dummyAttrubuts: MangaAttributes = MangaAttributes(title: dummyLang, description: dummyLang, year: 2000, status: "Tired")
-var dummyLang: MangaLang = MangaLang(en: "en")
+var dummyAttrubuts: MangaAttributes = MangaAttributes(title: dummyLang,// description: dummyLang,
+                                                      year: 3000, status: "Very Sad")
+var dummyLang: MangaLang = MangaLang(en: "Something very bad happened")
 
 var dummyRelation = [MangaRelations]()
 

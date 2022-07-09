@@ -83,7 +83,8 @@ struct Manga: Codable{
 
 struct MangaAttributes: Codable{
     var title: MangaLang
-    var description: MangaLang
+    //MARK: - Temporaily removed Descrtiption cause too many errors result from this 
+    //var description: MangaLang?
    // var lastChapter: String
     var year: Int? //Not all Manga on Manga Dex have Year Released, Causes errors if assumed. Same applies to above ones. Just rather not force them into app
     var status: String

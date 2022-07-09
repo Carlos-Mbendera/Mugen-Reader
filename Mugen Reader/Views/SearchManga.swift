@@ -71,41 +71,15 @@ struct SearchManga: View {
         
         let newQueryText =  queryText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
-        let apiString = "https://api.mangadex.org/manga?title=\(newQueryText!)&includedTagsMode=AND&excludedTagsMode=OR&availableTranslatedLanguage%5B%5D=en&contentRating%5B%5D=safe&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=manga&includes%5B%5D=cover_art"
+        let apiString = "https://api.mangadex.org/manga?title=\(newQueryText!)&includedTagsMode=AND&excludedTagsMode=OR&availableTranslatedLanguage%5B%5D=en&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=manga&includes%5B%5D=cover_art"
         
         
-      //This call works fine at the costs of any and all lewd to suggustive manga
-        //Can put them back if you remove descriptions from the Codable 
         
         print(apiString)
         
         
-        guard let apiurl = URL(string: apiString) else {
-          
-            print("Failure and Emotional Damage")
-            return
-        }
-
+        mangaSearchResults = await callMangaDexAPI(apiPassedURL: apiString)
         
-            do{
-                let (data, _) = try await URLSession.shared.data(from: apiurl)
-              
-                print(data)
-                if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data){
-                    print(decodedResponse)
-                    
-                     mangaSearchResults = decodedResponse.data
-                    
-                    print("Done Get Searched For Manga")
-                    
-                }else{
-                    print("if let failed")
-                }
-                
-            }
-            catch{
-                print("INVALID DATA DUDE, Emotional Damage")
-            }
         }
         
     
